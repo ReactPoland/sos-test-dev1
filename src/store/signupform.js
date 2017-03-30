@@ -2,6 +2,7 @@
 // Constants
 // ------------------------------------
 export const SIGNUP_FORM_CHANGE_PAGE = 'SIGNUP_FORM_CHANGE_PAGE'
+export const SIGNUP_FORM_UPDATE_PROFILE = 'SIGNUP_FORM_UPDATE_PROFILE'
 // export const COUNTER_DOUBLE_ASYNC = 'COUNTER_DOUBLE_ASYNC'
 
 // ------------------------------------
@@ -10,6 +11,13 @@ export const SIGNUP_FORM_CHANGE_PAGE = 'SIGNUP_FORM_CHANGE_PAGE'
 export function signupChangePage (value) {
   return {
     type    : SIGNUP_FORM_CHANGE_PAGE,
+    payload : value
+  }
+}
+
+export function signupUpdateProfile (value) {
+  return {
+    type    : SIGNUP_FORM_UPDATE_PROFILE,
     payload : value
   }
 }
@@ -26,10 +34,23 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [SIGNUP_FORM_CHANGE_PAGE]    : (state, action) => ({
+  [SIGNUP_FORM_CHANGE_PAGE] : (state, action) => ({
     ...state,
     navPage: action.payload
-  })
+  }),
+  [SIGNUP_FORM_UPDATE_PROFILE] : (state, action) => {
+    const { fields } = state
+    const { payload } = action
+
+    Object.keys(payload).map(fieldName => {
+      fields[fieldName] = payload[fieldName]
+    })
+
+    return {
+      ...state,
+      fields
+    }
+  }
 }
 
 // ------------------------------------
@@ -41,7 +62,7 @@ const initialState = {
     email: '',
     password: '',
     confirmPassword: '',
-    gender: '',
+    gender: 'male',
     dateOfBirth: {
       day: '',
       month: '',

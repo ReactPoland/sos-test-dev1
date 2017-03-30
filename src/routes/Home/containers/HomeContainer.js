@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
-import { signupChangePage } from 'store/signupform'
+import { signupChangePage, signupUpdateProfile } from 'store/signupform'
 
 import HomeView from '../components/HomeView'
 
 const mapDispatchToProps = {
-  signupChangePage
+  signupChangePage,
+  signupUpdateProfile
 }
 
 const mapStateToProps = (state) => ({
