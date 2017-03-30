@@ -20,7 +20,7 @@ export class HomeView extends React.Component {
   }
 
   onDoneHandler = () => {
-    console.log(this.props.signupform.body)
+    console.log(this.props.signupform.fields)
   }
 
   render () {

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 
 const FormBody = ({ values, onChange, label }) => {
-
   return (
     <div className='form-block-step2-item form-block-paddTop25'>
       { label && (

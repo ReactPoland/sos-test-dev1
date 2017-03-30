@@ -42,3 +42,48 @@ export const isOlder18 = (year, month, day) => {
   const isOlder = (nowDay.getTime() - bornDay.getTime() - 567993600000 - (1000 * 60 * 60 * 24)) > 0
   return isOlder
 }
+
+// COMPONETS FORM BODY HELPERS
+
+export function nextClickHandler (ev) {
+  const { profile } = this.state
+  ev.preventDefault()
+
+  let invalidStates = Object.keys(profile).reduce((acc, fieldName) => {
+    acc = this.prepareValidState(fieldName, profile[fieldName], acc)
+    return acc
+  }, {})
+
+  if (!isValidState(invalidStates)) {
+    return this.setState({
+      invalid : invalidStates,
+      clickedNext: true
+    })
+  }
+
+  this.props.nextClick(profile)
+}
+
+export function onChangeValue (propName, value) {
+  let newState = {
+    profile: {
+      ...this.state.profile,
+      [propName]: value
+    }
+  }
+
+  if (this.state.clickedNext) {
+    newState['invalid'] = {
+      ...this.prepareValidState(propName, value)
+    }
+  }
+
+  this.setState(newState)
+}
+
+export function checkReg (propName, val) {
+  if (this.regExp[propName]) {
+    return !this.regExp[propName].test(val) ? ' is required' : null
+  }
+  return null
+}

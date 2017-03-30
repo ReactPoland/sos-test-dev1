@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import FormInput from 'components/Form/FormInput'
 import FormBody from 'components/Form/FormBody'
-import { prepareInputLabel, isValidState } from 'helpers/formHelpers'
+import { prepareInputLabel, checkReg, onChangeValue, nextClickHandler } from 'helpers/formHelpers'
 
 class FormBody1 extends React.Component {
   constructor (props) {
@@ -19,12 +19,11 @@ class FormBody1 extends React.Component {
     }
   }
 
-  checkReg = (propName, val) => {
-    if (this.regExp[propName]) {
-      return !this.regExp[propName].test(val) ? ' is required' : null
-    }
-    return null
-  }
+  checkReg = (propName, val) => checkReg.call(this, propName, val)
+
+  onChangeValue = (propName, value) => onChangeValue.call(this, propName, value)
+
+  nextClickHandler = (ev) => nextClickHandler.call(this, ev)
 
   prepareValidState = (propName, val, customInvalidState) => {
     const { profile } = this.state
@@ -39,42 +38,6 @@ class FormBody1 extends React.Component {
     }
 
     return invalidState
-  }
-
-  onChangeValue = (propName, value) => {
-    let newState = {
-      profile: {
-        ...this.state.profile,
-        [propName]: value
-      }
-    }
-
-    if (this.state.clickedNext) {
-      newState['invalid'] = {
-        ...this.prepareValidState(propName, value)
-      }
-    }
-
-    this.setState(newState)
-  }
-
-  nextClickHandler = (ev) => {
-    const { profile } = this.state
-    ev.preventDefault()
-
-    let invalidStates = Object.keys(profile).reduce((acc, fieldName) => {
-      acc = this.prepareValidState(fieldName, profile[fieldName], acc)
-      return acc
-    }, {})
-
-    if (!isValidState(invalidStates)) {
-      return this.setState({
-        invalid : invalidStates,
-        clickedNext: true
-      })
-    }
-
-    this.props.nextClick(this.state.profile)
   }
 
   onInputChangeHandler = (prop) => (ev) => this.onChangeValue(prop, ev.target.value)

@@ -3,7 +3,7 @@ import FormBirthInput from 'components/Form/FormBirthInput'
 import FormGenderInput from 'components/Form/FormGenderInput'
 import FormAboutSelect from 'components/Form/FormAboutSelect'
 import FormBody from 'components/Form/FormBody'
-import { isValidState, correctDate, prepareInputLabel, isOlder18 } from 'helpers/formHelpers'
+import { correctDate, prepareInputLabel, isOlder18, onChangeValue, nextClickHandler, checkReg } from 'helpers/formHelpers'
 
 class FormBody2 extends React.Component {
   constructor (props) {
@@ -23,12 +23,11 @@ class FormBody2 extends React.Component {
     }
   }
 
-  checkReg = (propName, val) => {
-    if (this.regExp[propName]) {
-      return !this.regExp[propName].test(val) ? ' is required' : null
-    }
-    return null
-  }
+  checkReg = (propName, val) => checkReg.call(this, propName, val)
+
+  onChangeValue = (propName, value) => onChangeValue.call(this, propName, value)
+
+  nextClickHandler = (ev) => nextClickHandler.call(this, ev)
 
   prepareValidState = (propName, val, customInvalidState) => {
     const { profile } = this.state
@@ -57,50 +56,12 @@ class FormBody2 extends React.Component {
     return invalidState
   }
 
-  onChangeValue = (propName, value) => {
-    let newState = {
-      profile: {
-        ...this.state.profile,
-        [propName]: value
-      }
-    }
-
-    if (this.state.clickedNext) {
-      newState['invalid'] = {
-        ...this.prepareValidState(propName, value)
-      }
-    }
-
-    this.setState(newState)
-  }
-
-  nextClickHandler = (ev) => {
-    ev.preventDefault()
-    const { profile } = this.state
-
-    let invalidStates = Object.keys(profile).reduce((acc, fieldName) => {
-      acc = this.prepareValidState(fieldName, profile[fieldName], acc)
-      return acc
-    }, {})
-
-    if (!isValidState(invalidStates)) {
-      return this.setState({
-        invalid : invalidStates,
-        clickedNext: true
-      })
-    }
-
-    this.props.nextClick(profile)
-  }
-
   onInputChangeHandler = (propName) => (ev) => this.onChangeValue(propName, ev.target.value)
   onGenderChangeHandler = (propName) => (val) => this.onChangeValue(propName, val)
 
   render () {
     const { backClick } = this.props
     const { profile: { day, month, year, hearFrom, gender }, invalid } = this.state
-    // const { day, month, year, hearFrom, gender } = this.state.profile
-    console.log(this.state.invalid)
 
     return (
       <FormBody
