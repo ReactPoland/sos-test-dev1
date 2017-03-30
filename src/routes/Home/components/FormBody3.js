@@ -1,16 +1,15 @@
 import React, { PropTypes } from 'react'
-import FormInput from 'components/Form/FormInput'
 import FormBody from 'components/Form/FormBody'
+import okImage from '../assets/ok.png'
 
-const FormBody3 = ({ backClick, nextClick }) => {
+const FormBody3 = ({ backClick, nextClick, onDoneClick }) => {
   return (
     <FormBody
       backClick={backClick}
       nextClick={nextClick} >
-      <div style={{ width: '100%' }} >
-        <FormInput label={{ text: 'Email' }} />
-        <FormInput label={{ text: 'Password' }} />
-        <FormInput label={{ text: 'Confirm password' }} />
+      <div className='home-form-body' >
+        <img className='home-done-img' src={okImage} />
+        <a className='home-done-link' onClick={onDoneClick} href='#'>Go to dashboard</a>
       </div>
     </FormBody>
   )
@@ -18,7 +17,8 @@ const FormBody3 = ({ backClick, nextClick }) => {
 
 FormBody3.propTypes = {
   backClick: PropTypes.func,
-  nextClick: PropTypes.func
+  nextClick: PropTypes.func,
+  onDoneClick: PropTypes.func.isRequired
 }
 
 export default FormBody3

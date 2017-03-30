@@ -24,15 +24,21 @@ export const HomeView = ({ signupform, signupChangePage }) => {
         ev.preventDefault()
         signupChangePage(2)
       }} />,
-    <FormBody3 />
+    <FormBody3
+      onDoneClick={(ev) => {
+        ev.preventDefault()
+        console.log(signupform.fields)
+      }} />
   ]
+
+  const formHeader = ['Signup', 'Signup', 'Thank you!']
 
   const progressValue = [ 33.3, 66.6, 100 ]
 
   return (
     <div className='home-page-view'>
       <Form>
-        <FormHeader text='Signup' />
+        <FormHeader text={formHeader[signupform.navPage]} />
         <ProgressTrip progress={progressValue[signupform.navPage]} />
         {formBody[signupform.navPage] }
       </Form>

@@ -1,5 +1,35 @@
-.home-page-view {
-  // display: flex;
-  // align-items: flex-start;
-  height: 100vh;
+.home {
+  &-page-view {
+    // display: flex;
+    // align-items: flex-start;
+    height: 100vh;
+  }
+
+  &-form-body {
+    width: 100%
+  }
+
+  &-done {
+    &-img {
+      width: 160px;
+      display: block;
+      margin: 0 auto;
+      margin-top: 15px;
+    }
+
+    &-link {
+      border: 1px solid #4d92df;
+      margin: 35px auto 0;
+      padding: 11px 0;
+      border-radius: 4px;
+      display: block;
+      width: 154px;
+      font-size: 16px;
+
+      &:hover {
+        text-decoration: none;        
+      }
+    }
+  }
+
 }

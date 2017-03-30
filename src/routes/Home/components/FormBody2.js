@@ -7,7 +7,7 @@ const FormBody2 = ({ backClick, nextClick }) => {
     <FormBody
       backClick={backClick}
       nextClick={nextClick} >
-      <div style={{ width: '100%' }} >
+      <div className='home-form-body' >
         <FormInput label={{ text: 'Email' }} />
         <FormInput label={{ text: 'Password' }} />
         <FormInput label={{ text: 'Confirm password' }} />
