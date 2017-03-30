@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 
-const FormNav = ({ nextClick, backClick }) => {
+const FormNav = ({ nextClick, backClick, height }) => {
   return (
-    <div className='form-block-nav' >
+    <div className='form-block-nav' style={{ height }} >
       {backClick && (
         <a
           className='form-block-nav-link form-block-nav-back'
@@ -21,7 +21,8 @@ const FormNav = ({ nextClick, backClick }) => {
 
 FormNav.propTypes = {
   nextClick: PropTypes.func,
-  backClick: PropTypes.func
+  backClick: PropTypes.func,
+  height: PropTypes.number.isRequired
 }
 
 export default FormNav

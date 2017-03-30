@@ -4,28 +4,45 @@ import ProgressTrip from 'components/ProgressTrip'
 // import DuckImage from '../assets/Duck.jpg'
 import './HomeView.scss'
 import Form from 'components/Form'
-import FormInput from 'components/Form/FormInput'
-import FormBody from 'components/Form/FormBody'
+import FormBody1 from './FormBody1'
+import FormBody2 from './FormBody2'
+import FormBody3 from './FormBody3'
 
-export const HomeView = (props) => {
-  console.log(props)
+export const HomeView = ({ signupform, signupChangePage }) => {
+  const formBody = [
+    <FormBody1
+      nextClick={(ev) => {
+        ev.preventDefault()
+        signupChangePage(1)
+      }} />,
+    <FormBody2
+      backClick={(ev) => {
+        ev.preventDefault()
+        signupChangePage(0)
+      }}
+      nextClick={(ev) => {
+        ev.preventDefault()
+        signupChangePage(2)
+      }} />,
+    <FormBody3 />
+  ]
+
+  const progressValue = [ 33.3, 66.6, 100 ]
+
   return (
     <div className='home-page-view'>
       <Form>
         <FormHeader text='Signup' />
-        <ProgressTrip progress={30} />
-        <FormBody
-          backClick={() => console.log('back handler')}
-          nextClick={() => console.log('next handler')} >
-          <div style={{ width: '100%' }} >
-            <FormInput label={{ text: 'Email' }} />
-            <FormInput label={{ text: 'Password' }} />
-            <FormInput label={{ text: 'Confirm password' }} />
-          </div>
-        </FormBody>
+        <ProgressTrip progress={progressValue[signupform.navPage]} />
+        {formBody[signupform.navPage] }
       </Form>
     </div>
   )
+}
+
+HomeView.propTypes = {
+  signupform: React.PropTypes.object.isRequired,
+  signupChangePage: React.PropTypes.func.isRequired
 }
 
 export default HomeView

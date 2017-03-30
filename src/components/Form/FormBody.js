@@ -3,8 +3,10 @@ import FormNav from './FormNav'
 
 const FormBody = ({ children, backClick, nextClick }) => {
   const withNav = backClick || nextClick
+  const formNavHeight = 58
   let formHeight = 350
-  if (!withNav) formHeight += 100
+
+  if (!withNav) formHeight += formNavHeight
 
   return (
     <div>
@@ -12,7 +14,7 @@ const FormBody = ({ children, backClick, nextClick }) => {
         {children}
       </div>
       { withNav && (
-        <FormNav backClick={backClick} nextClick={nextClick} />
+        <FormNav height={formNavHeight} backClick={backClick} nextClick={nextClick} />
       ) }
     </div>
   )
