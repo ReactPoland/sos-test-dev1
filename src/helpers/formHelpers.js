@@ -42,4 +42,3 @@ export const isOlder18 = (year, month, day) => {
   const isOlder = (nowDay.getTime() - bornDay.getTime() - 567993600000 - (1000 * 60 * 60 * 24)) > 0
   return isOlder
 }
-// TODO: move checking via reg exp

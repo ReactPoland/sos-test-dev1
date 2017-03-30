@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import FormInput from 'components/Form/FormInput'
 import FormBody from 'components/Form/FormBody'
-import { prepareInputLabel } from 'helpers/formHelpers'
+import { prepareInputLabel, isValidState } from 'helpers/formHelpers'
 
 class FormBody1 extends React.Component {
   constructor (props) {
@@ -19,7 +19,27 @@ class FormBody1 extends React.Component {
     }
   }
 
-  // TODO: check validation for confirm password
+  checkReg = (propName, val) => {
+    if (this.regExp[propName]) {
+      return !this.regExp[propName].test(val) ? ' is required' : null
+    }
+    return null
+  }
+
+  prepareValidState = (propName, val, customInvalidState) => {
+    const { profile } = this.state
+    let invalidState
+    if (customInvalidState) invalidState = { ...customInvalidState }
+    else invalidState = { ...this.state.invalid }
+
+    invalidState[propName] = this.checkReg(propName, val)
+
+    if (propName === 'confirmPassword' && profile.password !== val) {
+      invalidState[propName] = ' doesn\'t match'
+    }
+
+    return invalidState
+  }
 
   onChangeValue = (propName, value) => {
     let newState = {
@@ -30,36 +50,31 @@ class FormBody1 extends React.Component {
     }
 
     if (this.state.clickedNext) {
-      newState['invalid'] = { ...this.state.invalid }
-      newState['invalid'][propName] = !this.regExp[propName].test(value) ? ' is required' : null
+      newState['invalid'] = {
+        ...this.prepareValidState(propName, value)
+      }
     }
 
     this.setState(newState)
   }
 
   nextClickHandler = (ev) => {
+    const { profile } = this.state
     ev.preventDefault()
-    let invalidStates = {}
-    let isValidFrom = true
-    Object.keys(this.state.profile).map(fieldName => {
-      const fieldValue = this.state.profile[fieldName]
-      invalidStates[fieldName] = !this.regExp[fieldName].test(fieldValue) ? ' is required' : null
-    })
 
-    if (this.state.profile.password !== this.state.profile.confirmPassword) {
-      invalidStates['confirmPassword'] = ' doesn\'t match'
+    let invalidStates = Object.keys(profile).reduce((acc, fieldName) => {
+      acc = this.prepareValidState(fieldName, profile[fieldName], acc)
+      return acc
+    }, {})
+
+    if (!isValidState(invalidStates)) {
+      return this.setState({
+        invalid : invalidStates,
+        clickedNext: true
+      })
     }
 
-    Object.keys(invalidStates).map(fieldName => {
-      isValidFrom = isValidFrom && !invalidStates[fieldName]
-    })
-
-    this.setState({
-      invalid : invalidStates,
-      clickedNext: true
-    })
-
-    if (isValidFrom) this.props.nextClick(this.state.profile)
+    this.props.nextClick(this.state.profile)
   }
 
   onInputChangeHandler = (prop) => (ev) => this.onChangeValue(prop, ev.target.value)
