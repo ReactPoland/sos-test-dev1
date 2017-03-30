@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
-import FormInput from 'components/Form/FormInput'
+import FormBirthInput from 'components/Form/FormBirthInput'
+import FormGenderInput from 'components/Form/FormGenderInput'
+import FormAboutSelect from 'components/Form/FormAboutSelect'
 import FormBody from 'components/Form/FormBody'
 
 const FormBody2 = ({ backClick, nextClick }) => {
@@ -8,9 +10,9 @@ const FormBody2 = ({ backClick, nextClick }) => {
       backClick={backClick}
       nextClick={nextClick} >
       <div className='home-form-body' >
-        <FormInput label={{ text: 'Email' }} />
-        <FormInput label={{ text: 'Password' }} />
-        <FormInput label={{ text: 'Confirm password' }} />
+        <FormBirthInput />
+        <FormGenderInput />
+        <FormAboutSelect />
       </div>
     </FormBody>
   )
