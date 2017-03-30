@@ -8,6 +8,7 @@ import FormInput from 'components/Form/FormInput'
 import FormBody from 'components/Form/FormBody'
 
 export const HomeView = (props) => {
+  console.log(props)
   return (
     <div className='home-page-view'>
       <Form>

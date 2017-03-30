@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import locationReducer from './location'
+import signupformReducer from './signupform'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
+    signupform: signupformReducer,
     location: locationReducer,
     ...asyncReducers
   })
