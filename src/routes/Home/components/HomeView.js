@@ -16,7 +16,7 @@ export class HomeView extends React.Component {
   }
 
   backClickHandler = () => {
-    this.props.signupChangePage(this.props.signupform.pageNumb - 1)
+    this.props.signupChangePage(this.props.signupform.navPage - 1)
   }
 
   onDoneHandler = () => {
@@ -27,7 +27,7 @@ export class HomeView extends React.Component {
     const { signupform } = this.props
     const {
       password, confirmPassword, email,
-      dateOfBirth, hearFrom, gender
+      day, month, year, hearFrom, gender
     } = signupform.fields
 
     const formBody = [
@@ -38,7 +38,7 @@ export class HomeView extends React.Component {
         nextClick={this.formBodyAccept(1)} />,
       <FormBody2
         profile={{
-          dateOfBirth, hearFrom, gender
+          day, month, year, hearFrom, gender
         }}
         backClick={this.backClickHandler}
         nextClick={this.formBodyAccept(2)} />,

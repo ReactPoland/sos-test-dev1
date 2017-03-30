@@ -63,11 +63,9 @@ const initialState = {
     password: '',
     confirmPassword: '',
     gender: 'male',
-    dateOfBirth: {
-      day: '',
-      month: '',
-      year: ''
-    },
+    day: '',
+    month: '',
+    year: '',
     hearFrom: ''
   }
 }

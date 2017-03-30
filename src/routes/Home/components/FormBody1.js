@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import FormInput from 'components/Form/FormInput'
 import FormBody from 'components/Form/FormBody'
+import { prepareInputLabel } from 'helpers/formHelpers'
 
 class FormBody1 extends React.Component {
   constructor (props) {
@@ -20,17 +21,17 @@ class FormBody1 extends React.Component {
 
   // TODO: check validation for confirm password
 
-  onChangeValue = (propName) => (ev) => {
+  onChangeValue = (propName, value) => {
     let newState = {
       profile: {
         ...this.state.profile,
-        [propName]: ev.target.value
+        [propName]: value
       }
     }
 
     if (this.state.clickedNext) {
       newState['invalid'] = { ...this.state.invalid }
-      newState['invalid'][propName] = !this.regExp[propName].test(ev.target.value) ? ' is required' : null
+      newState['invalid'][propName] = !this.regExp[propName].test(value) ? ' is required' : null
     }
 
     this.setState(newState)
@@ -41,7 +42,7 @@ class FormBody1 extends React.Component {
     let invalidStates = {}
     let isValidFrom = true
     Object.keys(this.state.profile).map(fieldName => {
-      const fieldValue = this.state.profile[fieldName].trim()
+      const fieldValue = this.state.profile[fieldName]
       invalidStates[fieldName] = !this.regExp[fieldName].test(fieldValue) ? ' is required' : null
     })
 
@@ -61,16 +62,7 @@ class FormBody1 extends React.Component {
     if (isValidFrom) this.props.nextClick(this.state.profile)
   }
 
-  prepareInputLabel = (isInvalid, text) => {
-    let label = {
-      text
-    }
-    if (isInvalid) {
-      label.text = text + isInvalid
-      label.color = '#da3340'
-    }
-    return label
-  }
+  onInputChangeHandler = (prop) => (ev) => this.onChangeValue(prop, ev.target.value)
 
   render () {
     // const { profile } = this.props
@@ -80,19 +72,19 @@ class FormBody1 extends React.Component {
         nextClick={this.nextClickHandler} >
         <div className='home-form-body' >
           <FormInput
-            onChange={this.onChangeValue('email')}
+            onChange={this.onInputChangeHandler('email')}
             value={this.state.profile.email}
-            label={this.prepareInputLabel(invalid.email, 'Email')} />
+            label={prepareInputLabel(invalid.email, 'Email')} />
           <FormInput
             type='password'
-            onChange={this.onChangeValue('password')}
+            onChange={this.onInputChangeHandler('password')}
             value={this.state.profile.password}
-            label={this.prepareInputLabel(invalid.password, 'Password')} />
+            label={prepareInputLabel(invalid.password, 'Password')} />
           <FormInput
             type='password'
-            onChange={this.onChangeValue('confirmPassword')}
+            onChange={this.onInputChangeHandler('confirmPassword')}
             value={this.state.profile.confirmPassword}
-            label={this.prepareInputLabel(invalid.confirmPassword, 'Confirm password')} />
+            label={prepareInputLabel(invalid.confirmPassword, 'Confirm password')} />
         </div>
       </FormBody>
     )
