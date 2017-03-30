@@ -1,0 +1,50 @@
+.form-block {
+  width: 350px;
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  overflow-y: auto;
+
+  &-input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    font-size: 16px;
+    outline: none;
+
+    &-wrap {
+      padding: 0 0 20px;
+    }
+
+    &-label {
+      text-align: left;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+  }
+
+  &-nav {
+    border-top: 1px solid #ccc;
+    justify-content: space-between;
+    display: flex;
+    margin-top: 3px;
+    padding: 18px;
+
+    &-link {
+      font-size: 15px;
+      color: #4d92df;
+    }
+
+    &-back {
+      color: #aaa;
+    }
+  }
+
+  &-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+  }
+}
