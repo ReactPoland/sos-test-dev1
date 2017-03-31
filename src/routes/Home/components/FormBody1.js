@@ -15,7 +15,7 @@ class FormBody1 extends React.Component {
     this.regExp = {
       email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       password: /^.{6,}$/,
-      confirmPassword: /^.{6,}$/
+      confirmPassword: /^.{1,}$/
     }
   }
 
@@ -33,8 +33,14 @@ class FormBody1 extends React.Component {
 
     invalidState[propName] = this.checkReg(propName, val)
 
-    if (propName === 'confirmPassword' && profile.password !== val) {
-      invalidState[propName] = ' doesn\'t match'
+    switch (propName) {
+      case 'confirmPassword':
+        if (invalidState[propName]) break
+        invalidState[propName] = profile.password !== val ? ' doesn\'t match' : null
+        break
+      case 'password':
+        invalidState['confirmPassword'] = profile.confirmPassword !== val ? ' doesn\'t match' : null
+        break
     }
 
     return invalidState
