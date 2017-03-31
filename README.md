@@ -10,7 +10,7 @@ Based on starter kit [davezuko/react-redux-starter-kit](https://github.com/davez
  - `npm install`
  - `npm start`
 
-Next step is go on `localhost:3000`.
+Next step is go to `localhost:3000`.
 
 Have fun :)
 ## Thank You
