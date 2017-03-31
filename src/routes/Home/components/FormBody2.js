@@ -39,13 +39,25 @@ class FormBody2 extends React.Component {
       case 'day':
       case 'month':
       case 'year':
-        invalidState['birth'] = this.checkReg(propName, val)
         let profDate = {
           ...profile,
           [propName]: val
         }
+        const isEmpty = !(profDate.year.length && profDate.month.length && profDate.day.length)
+        if (isEmpty) {
+          invalidState['birth'] = ' is required'
+          break
+        }
+
+        invalidState['birth'] = this.checkReg(propName, val)
+
+        if (invalidState['birth']) {
+          invalidState['birth'] = ' is invalid'
+          break
+        }
+
         if (!isOlder18(profDate.year, profDate.month, profDate.day)) invalidState['birth'] = ' must be 18 year or more'
-        if (!correctDate(profDate.year, profDate.month, profDate.day)) invalidState['birth'] = ' is invalid date'
+        if (!correctDate(profDate.year, profDate.month, profDate.day)) invalidState['birth'] = ' is invalid'
         break
       default:
         invalidState[propName] = this.checkReg(propName, val)
