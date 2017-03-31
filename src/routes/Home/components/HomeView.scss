@@ -1,3 +1,5 @@
+@import '../../../styles/config';
+
 .home {
   &-page-view {
     // display: flex;
@@ -30,7 +32,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #4d92df;
+      border: 1px solid $form-blue-color;
       margin: 35px auto 0;
       padding: 11px 0;
       border-radius: 4px;

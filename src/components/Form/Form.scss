@@ -1,13 +1,15 @@
+@import '../../styles/config';
+
 .form-block {
   width: 350px;
   margin: auto;
-  border: 1px solid #ccc;
+  border: 1px solid $form-black-color;
   border-radius: 7px;
   overflow-y: auto;
 
   &-input {
     border: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $form-black-color;
     width: 100%;
     font-size: 16px;
     outline: none;
@@ -25,7 +27,7 @@
   }
 
   &-nav {
-    border-top: 1px solid #ccc;
+    border-top: 1px solid $form-black-color;
     margin-top: 3px;
     padding: 18px;
     height: 58px;
@@ -33,7 +35,7 @@
 
     &-link {
       font-size: 15px;
-      color: #4d92df;
+      color: $form-blue-color;
       float: right;
       display: flex;
 
@@ -62,12 +64,12 @@
     height: 40px;
     padding: 0;
     margin: 0;
-    border: 1px solid #ccc;
+    border: 1px solid $form-black-color;
     border-right: none;
     outline: none;
 
     &:last-child {
-      border-right: 1px solid #ccc;
+      border-right: 1px solid $form-black-color;
     }
 
     &-label {
@@ -102,7 +104,7 @@
       top: 50%;
       margin-top: -10px;
       right: 10px;
-      color: #4d92df;
+      color: $form-blue-color;
       z-index: -1;
     }
   }
@@ -124,7 +126,7 @@
       border-radius: 0;
       padding: 0;
       margin: 0;
-      border: 1px solid #ccc;
+      border: 1px solid $form-black-color;
       background-color: white;
       color: #333;
       text-transform: uppercase;
@@ -133,13 +135,13 @@
       outline: none;
 
       &:last-child {
-        border-right: 1px solid #ccc;
+        border-right: 1px solid $form-black-color;
       }
 
       &-active {
         font-weight: bold;
         color: white;
-        background-color: #4d92df
+        background-color: $form-blue-color
       }
     }
   }
