@@ -19,7 +19,8 @@ export class HomeView extends React.Component {
     this.props.signupChangePage(this.props.signupform.navPage - 1)
   }
 
-  onDoneHandler = () => {
+  onDoneHandler = (ev) => {
+    ev.preventDefault()
     console.log(this.props.signupform.fields)
   }
 

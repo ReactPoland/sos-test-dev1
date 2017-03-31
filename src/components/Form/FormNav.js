@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import FormIcon from './FormIcon'
 
 const FormNav = ({ nextClick, backClick, height }) => {
   return (
@@ -13,7 +14,11 @@ const FormNav = ({ nextClick, backClick, height }) => {
         <a
           className='form-block-nav-link'
           href='#'
-          onClick={nextClick} >Next</a>
+          onClick={nextClick} >Next
+          <i>
+            <i className='material-icons' style={{ fontSize: 20 }}>arrow_forward</i>
+          </i>
+        </a>
       )}
     </div>
   )
