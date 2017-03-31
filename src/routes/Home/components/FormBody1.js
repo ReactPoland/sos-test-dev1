@@ -39,6 +39,10 @@ class FormBody1 extends React.Component {
         invalidState[propName] = profile.password !== val ? ' doesn\'t match' : null
         break
       case 'password':
+        if (profile.confirmPassword.length) {
+          invalidState['confirmPassword'] = profile.confirmPassword !== val ? ' doesn\'t match' : null
+        }
+
         if (val.length === 0) {
           invalidState[propName] = ' is required'
           break
@@ -47,9 +51,7 @@ class FormBody1 extends React.Component {
           invalidState[propName] = ' should be minimum 6 characters long'
           break
         }
-        if (profile.confirmPassword.length) {
-          invalidState['confirmPassword'] = profile.confirmPassword !== val ? ' doesn\'t match' : null
-        }
+
         break
     }
 
