@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import FormIcon from './FormIcon'
 
 const FormNav = ({ nextClick, backClick, height }) => {
   return (
