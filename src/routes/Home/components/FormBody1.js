@@ -39,7 +39,8 @@ class FormBody1 extends React.Component {
         invalidState[propName] = profile.password !== val ? ' doesn\'t match' : null
         break
       case 'password':
-        invalidState['confirmPassword'] = profile.confirmPassword !== val ? ' doesn\'t match' : null
+        if (profile.confirmPassword.length)
+          invalidState['confirmPassword'] = profile.confirmPassword !== val ? ' doesn\'t match' : null
         break
     }
 
