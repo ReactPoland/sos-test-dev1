@@ -15,7 +15,7 @@ const FormNav = ({ nextClick, backClick, height }) => {
           href='#'
           onClick={nextClick} >Next
           <i>
-            <i className='material-icons' style={{ fontSize: 20 }}>arrow_forward</i>
+            <i className='material-icons form-block-nav-link-ic' >arrow_forward</i>
           </i>
         </a>
       )}
