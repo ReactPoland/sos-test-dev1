@@ -14,7 +14,7 @@ class FormBody1 extends React.Component {
 
     this.regExp = {
       email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      password: /^.{6,}$/,
+      // password: /^.{6,}$/,
       confirmPassword: /^.{1,}$/
     }
   }
@@ -39,8 +39,17 @@ class FormBody1 extends React.Component {
         invalidState[propName] = profile.password !== val ? ' doesn\'t match' : null
         break
       case 'password':
-        if (profile.confirmPassword.length)
+        if (val.length === 0) {
+          invalidState[propName] = ' is required'
+          break
+        }
+        if (val.length < 6) {
+          invalidState[propName] = ' should be minimum 6 characters long'
+          break
+        }
+        if (profile.confirmPassword.length) {
           invalidState['confirmPassword'] = profile.confirmPassword !== val ? ' doesn\'t match' : null
+        }
         break
     }
 
