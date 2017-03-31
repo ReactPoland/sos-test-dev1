@@ -7,7 +7,7 @@ const FormBody3 = ({ onDoneClick }) => {
     <FormBody >
       <div className='home-form-body' >
         <img className='home-done-img' src={okImage} />
-        <a className='home-done-link' onClick={onDoneClick} href='#'>Go to dashboard
+        <a className='home-done-link' onClick={onDoneClick} href='#'>Go to Dashboard
             <i className='material-icons home-done-link-ic'>arrow_forward</i>
         </a>
       </div>

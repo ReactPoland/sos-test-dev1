@@ -34,6 +34,11 @@ class FormBody1 extends React.Component {
     invalidState[propName] = this.checkReg(propName, val)
 
     switch (propName) {
+      case 'email':
+        if (invalidState[propName] && val.length) {
+          invalidState[propName] = ' is invalid'
+        }
+        break
       case 'confirmPassword':
         if (invalidState[propName]) break
         invalidState[propName] = profile.password !== val ? ' doesn\'t match' : null
